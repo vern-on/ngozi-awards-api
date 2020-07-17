@@ -1,0 +1,55 @@
+version: '3.6'
+
+services:
+
+  web:
+    build:
+      context: ./config
+      dockerfile: web.dockerfile
+    restart: always
+    volumes:
+      - "./app:/var/www/html"
+    ports:
+      - "8331:80"
+
+
+  php:
+    restart: always
+    build:
+      context: ./config
+      dockerfile: php.dev.dockerfile
+    depends_on:
+      - db
+    volumes:
+      - "./app:/var/www/html"
+
+  db:
+    image: mariadb
+    restart: always
+    volumes:
+      - ngozi-awards-db-vol:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
+      MYSQL_DATABASE: ngozi-awards
+    secrets:
+      - db_root_password
+    ports:
+      - "8332:3306"
+
+  # queue:
+  #   build:
+  #     context: ./config
+  #     dockerfile: queue.dev.dockerfile
+  #   depends_on:
+  #     - php
+  #     - db
+  #   volumes:
+  #     - "./app:/var/www/html"
+
+secrets:
+   db_root_password:
+     file: ./secrets/db_root_password
+
+
+volumes:
+  ngozi-awards-db-vol:
