@@ -1,0 +1,8 @@
+{
+  "better-phpunit.docker.enable": true,
+  "better-phpunit.commandSuffix": "--stop-on-failure",
+  "better-phpunit.docker.command": "docker exec -t ngozi-awards-api_php_1",
+  "better-phpunit.docker.paths": {
+    "/home/junelsolis/ngozi-awards-api/app": "."
+  }
+}
