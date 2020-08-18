@@ -62,7 +62,7 @@ jobs:
             docker-compose exec -T php php artisan route:clear
             docker-compose exec -T php php artisan view:clear
             docker-compose exec -T php php artisan cache:clear
-            docker-compose exec -T php php artisan migrate
+            docker-compose exec -T php php artisan migrate:fresh --seed
 
             docker-compose restart queue
             docker-compose up -d
