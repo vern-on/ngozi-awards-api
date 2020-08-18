@@ -1,7 +1,6 @@
-version: '3.6'
+version: "3.6"
 
 services:
-
   web:
     build:
       context: ./config
@@ -10,8 +9,7 @@ services:
     volumes:
       - "./app:/var/www/html"
     ports:
-      - "8331:80"
-
+      - "127.0.0.1:8331:80"
 
   php:
     restart: always
@@ -34,22 +32,11 @@ services:
     secrets:
       - db_root_password
     ports:
-      - "8332:3306"
-
-  # queue:
-  #   build:
-  #     context: ./config
-  #     dockerfile: queue.dev.dockerfile
-  #   depends_on:
-  #     - php
-  #     - db
-  #   volumes:
-  #     - "./app:/var/www/html"
+      - "127.0.0.1:8332:3306"
 
 secrets:
-   db_root_password:
-     file: ./secrets/db_root_password
-
+  db_root_password:
+    file: ./secrets/db_root_password
 
 volumes:
   ngozi-awards-db-vol:
