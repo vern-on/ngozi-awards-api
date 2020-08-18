@@ -17,6 +17,13 @@ return [
 
     'paths' => ['api/*'],
 
+    'except' => [
+        'api/faq',
+        'api/faq/*',
+        'api/partners',
+        'api/contact'
+    ],
+
     'allowed_methods' => ['*'],
 
     'allowed_origins' => ['*'],
