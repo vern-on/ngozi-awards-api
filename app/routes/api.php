@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('/faq', 'QuestionsController@index');
+Route::get('/faq/popular', 'QuestionsController@popular');
+Route::get('/faq/categories', 'QuestionsController@categories');
+Route::get('/faq/{slug}', 'QuestionsController@get');
+Route::get('/faq/{slug}/increment', 'QuestionsController@increment');

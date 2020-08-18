@@ -15,7 +15,7 @@ class QuestionsControllerTest extends TestCase
     {
         $question = factory(\App\Question::class)->create(['title' => 'Test question', 'slug' => 'test-question']);
 
-        $this->json('get', '/faq/test-question')->assertOk()->assertJsonStructure(['question']);
+        $this->json('get', 'api/faq/test-question')->assertOk()->assertJsonStructure(['question']);
     }
 
     /** @test */
@@ -23,7 +23,7 @@ class QuestionsControllerTest extends TestCase
     {
         factory(\App\Question::class, 20)->create();
 
-        $this->json('get', '/faq')->assertJsonStructure(['questions'])->assertJsonCount(20, 'questions');
+        $this->json('get', 'api/faq')->assertJsonStructure(['questions'])->assertJsonCount(20, 'questions');
     }
 
     /** @test */
@@ -32,7 +32,7 @@ class QuestionsControllerTest extends TestCase
         factory(\App\Question::class, 5)->create();
         factory(\App\Question::class)->create(['title' => 'Test question', 'slug' => 'test-question']);
 
-        $this->json('get', '/faq?filter=test question')->assertJsonCount(1, 'questions');
+        $this->json('get', 'api/faq?filter=test question')->assertJsonCount(1, 'questions');
     }
 
     /** @test */
@@ -44,7 +44,7 @@ class QuestionsControllerTest extends TestCase
         $question = factory(\App\Question::class)->create(['title' => 'Test question', 'slug' => 'test-question']);
         $question->categories()->attach($category->id);
 
-        $this->json('get', '/faq?category=test-category')->assertJsonCount(1, 'questions');
+        $this->json('get', 'api/faq?category=test-category')->assertJsonCount(1, 'questions');
     }
 
     /** @test */
@@ -52,7 +52,7 @@ class QuestionsControllerTest extends TestCase
     {
         factory(\App\QuestionCategory::class, 15)->create();
 
-        $this->json('get', '/faq/categories')->assertJsonStructure(['categories'])->assertJsonCount(15, 'categories');
+        $this->json('get', 'api/faq/categories')->assertJsonStructure(['categories'])->assertJsonCount(15, 'categories');
     }
 
     /** @test */
@@ -60,7 +60,7 @@ class QuestionsControllerTest extends TestCase
     {
         factory(\App\Question::class, 40)->create();
 
-        $this->json('get', '/faq/popular')->assertJsonStructure(['popular_questions'])->assertJsonCount(6, 'popular_questions');
+        $this->json('get', 'api/faq/popular')->assertJsonStructure(['popular_questions'])->assertJsonCount(6, 'popular_questions');
     }
 
     /** @test */
@@ -68,7 +68,7 @@ class QuestionsControllerTest extends TestCase
     {
         $question = factory(\App\Question::class)->create(['slug' => 'test', 'read_count' => 0]);
 
-        $this->json('get', '/faq/test/increment')->assertOk();
+        $this->json('get', 'api/faq/test/increment')->assertOk();
 
         $this->assertEquals(1, $question->refresh()->read_count);
     }
