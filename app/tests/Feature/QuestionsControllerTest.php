@@ -11,17 +11,11 @@ class QuestionsControllerTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function it_returns_the_faq_view()
-    {
-        $this->get('/faq')->assertViewIs('faq');
-    }
-
-    /** @test */
-    public function it_returns_the_faq_view_for_any_question_slug()
+    public function it_returns_the_question_for_any_question_slug()
     {
         $question = factory(\App\Question::class)->create(['title' => 'Test question', 'slug' => 'test-question']);
 
-        $this->get('/faq/test-question')->assertViewIs('faq');
+        $this->json('get', '/faq/test-question')->assertOk()->assertJsonStructure(['question']);
     }
 
     /** @test */

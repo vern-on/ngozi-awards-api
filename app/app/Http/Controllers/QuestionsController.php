@@ -8,11 +8,11 @@ use App\QuestionCategory;
 
 class QuestionsController extends Controller
 {
-    public function get(Request $request)
+    public function index(Request $request)
     {
-        if (!$request->expectsJson()) {
-            return view('faq');
-        }
+        // if (!$request->expectsJson()) {
+        //     return view('faq');
+        // }
 
         $query = Question::query()->with('categories');
 
@@ -31,6 +31,13 @@ class QuestionsController extends Controller
         }
 
         return response()->json(['questions' => $query->get()]);
+    }
+
+    public function get(Request $request)
+    {
+        $question = Question::where('slug', $request['slug'])->firstOrFail();
+
+        return response()->json(['question' => $question]);
     }
 
     public function categories()
