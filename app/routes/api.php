@@ -19,3 +19,7 @@ Route::get('/faq/popular', 'QuestionsController@popular');
 Route::get('/faq/categories', 'QuestionsController@categories');
 Route::get('/faq/{slug}', 'QuestionsController@get');
 Route::get('/faq/{slug}/increment', 'QuestionsController@increment');
+
+Route::get('/partners', 'SponsorsController@partners');
+
+Route::post('/contact', 'ContactsController@store');

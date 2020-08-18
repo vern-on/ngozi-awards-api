@@ -9,9 +9,9 @@ class SponsorsController extends Controller
 {
     public function partners()
     {
-        if (!request()->expectsJson()) {
-            return view('partners');
-        }
+        // if (!request()->expectsJson()) {
+        //     return view('partners');
+        // }
 
         $partners = Sponsor::paginate(12);
 
