@@ -54,7 +54,7 @@ jobs:
           key: ${{ secrets.dev_private_key }}
           port: 22
           script: |
-            cd /srv/delivr.ae-api
+            cd /srv/dev/ngozi-awards-api
             git pull
             git reset --hard HEAD
 
