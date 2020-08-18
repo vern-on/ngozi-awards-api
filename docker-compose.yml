@@ -15,7 +15,7 @@ services:
     restart: always
     build:
       context: ./config
-      dockerfile: php.dev.dockerfile
+      dockerfile: php.dockerfile
     depends_on:
       - db
     volumes:
