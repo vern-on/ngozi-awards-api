@@ -4,10 +4,8 @@
 __Name:__ {{ $contact->name}}<br>
 __Email:__ {{ $contact->email }}
 
-@component('mail::button', ['url' => ''])
-Button Text
+@component('mail::panel')
+{{ $contact->message }}
 @endcomponent
 
-Thanks,<br>
-{{ config('app.name') }}
 @endcomponent
