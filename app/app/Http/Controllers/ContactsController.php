@@ -23,7 +23,7 @@ class ContactsController extends Controller
             'message' => $request['message'],
         ]);
 
-        Mail::queue(new ContactReceivedMessage($contact));
+        Mail::to('hello@ngoziawards.org')->queue(new ContactReceivedMessage($contact));
 
         return response()->json();
     }
